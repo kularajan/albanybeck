@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Country 1",
+        "capital": "Capital 1",
+        "population": 1000,
+        "currencies": [
+            "£",
+            "$"
+        ],
+        "flag": "Flag 1"
+    },
+    {
+        "name": "Country 2",
+        "capital": "Capital 2",
+        "population": 1000,
+        "currencies": [
+            "£",
+            "$"
+        ],
+        "flag": "Flag 2"
+    }
+]

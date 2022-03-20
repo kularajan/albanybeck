@@ -1,0 +1,28 @@
+<div class="card mt-5" *ngIf="isCountrySelected()">
+    <div class="card-header">
+        {{selectedCountry.name}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 detail-label">Capital</div>
+            <div class="col-md-6 detail-value">{{selectedCountry.capital}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 detail-label">Population</div>
+            <div class="col-md-6 detail-value">{{selectedCountry.population}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 detail-label">Currencies</div>
+            <div class="col-md-6 detail-value">
+                <div *ngFor="let currency of selectedCountry.currencies">{{currency.name + ' (' + currency.symbol +')'}}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 detail-label">Flag</div>
+            <div class="col-md-6 detail-value"><img src='{{selectedCountry.flag}}' height="20px"></div>
+        </div>
+    </div>
+</div>

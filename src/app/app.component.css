@@ -1,0 +1,30 @@
+:host ::ng-deep
+.detail-label{
+    margin-bottom: 5px;
+    color:darkmagenta
+}
+
+:host ::ng-deep
+.detail-value{
+    margin-bottom: 5px;
+}
+
+:host ::ng-deep
+.dropdown-container{
+    margin-bottom: 5px;
+    border-width: 1px;
+    border-radius: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+:host ::ng-deep
+.label-container{
+    margin-bottom: 5px;
+    color:#000000;
+}
+
+
+
