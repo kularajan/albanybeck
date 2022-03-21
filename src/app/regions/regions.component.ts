@@ -3,13 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store'
 import { AppState } from '../app-state'
-import { Region } from '../models/region.model';
-import { Country } from '../models/country.model';
-import { RegionService } from '../services/region.service';
-import { CountryService } from '../services/country.service';
-import { RegionState } from '../store/reducers/region.reducers';
-import { regionSelector } from '../store/selector/region.selector';
-
+import { Region, Country } from '../models';
+import { RegionService, CountryService } from '../services';
+import { getRegionCountries } from '../store/actions';
+import { regionSelector, countrySelector } from '../store/selector';
+import { RegionState, CountryState } from '../store/reducers';
 
 @Component({
   selector: 'app-regions',
@@ -18,25 +16,29 @@ import { regionSelector } from '../store/selector/region.selector';
   // encapsulation : ViewEncapsulation.ShadowDom
 })
 export class RegionsComponent implements OnInit {
-
-
-  regions$ = this.store.pipe(select(regionSelector));
+  countries$: Observable<Country>[] =[];
+  regions$ = this.regionStore.pipe(select(regionSelector));
+ 
   public countries: Country[] = [];
   public selectedCountryName: string = "";
   public selectedRegion: string = "";
 
-
-  constructor(private store: Store<RegionState>, private regionService: RegionService, private countryService: CountryService) { }
+  constructor(private regionStore: Store<RegionState>, private countryStore: Store<CountryState>, private regionService: RegionService, private countryService: CountryService) {
+    
+   }
 
   ngOnInit(): void {
-
+      //  this.countries$ = this.countryStore.pipe(select(countrySelector));
   }
 
   changeRegion(region: any) {
     this.selectedRegion = region.target.value;
-    this.selectedCountryName="";
+    this.selectedCountryName = "";
     this.countryService.getCountries(this.selectedRegion).subscribe(data => this.countries = data);
-
+    this.countryStore.dispatch(getRegionCountries({ query: region.target.value }));
+    // this.countries$ = this.countryStore.pipe(select(countrySelector));
+    
+    console.log(this.countries);
   }
 
   isRegionSelected() {
@@ -49,7 +51,7 @@ export class RegionsComponent implements OnInit {
 
   getSelectedCountryDetail() {
     if (this.selectedCountryName !== '') {
-      return this.countries.filter(i=> i.name===this.selectedCountryName)[0];
+      return this.countries.filter(i => i.name === this.selectedCountryName)[0];
     } else {
       return ({} as any) as Country;
     }
@@ -57,3 +59,6 @@ export class RegionsComponent implements OnInit {
 
 
 }
+
+
+

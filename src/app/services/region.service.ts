@@ -10,7 +10,6 @@ export class RegionService {
 
   private _urlRegion: string ="/assets/data/regions.json"
  
-  
   constructor(private http:HttpClient) { }
 
   getRegions(): Observable<Region[]>{
